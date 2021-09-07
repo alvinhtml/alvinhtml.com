@@ -1,0 +1,62 @@
+{
+  "name": "alvinhtml.com",
+  "version": "1.0.0",
+  "description": "www.alvinhtml.com",
+  "main": "test.js",
+  "directories": {
+    "test": "test"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack serve --mode development",
+    "start": "NODE_ENV=development webpack serve --mode development",
+    "lint": "npx eslint app/**/*.ts",
+    "build": "NODE_ENV=production webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/alvinhtml/alvinhtml.com.git"
+  },
+  "keywords": [
+    "alvinhtml"
+  ],
+  "author": "alvinhtml@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvinhtml/alvinhtml.com/issues"
+  },
+  "homepage": "https://github.com/alvinhtml/alvinhtml.com#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/register": "^7.15.3",
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^10.3.1",
+    "colors-console": "^1.0.3",
+    "css-loader": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "file-loader": "^6.2.0",
+    "highlight.js": "^11.2.0",
+    "html-minifier": "^4.0.0",
+    "html-webpack-plugin": "^5.3.2",
+    "marked": "^3.0.2",
+    "mini-css-extract-plugin": "^2.2.2",
+    "node-sass": "^6.0.1",
+    "normalize-scss": "^7.0.1",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "postcss-loader": "^6.1.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.3.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {}
+}
