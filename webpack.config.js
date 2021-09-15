@@ -5,9 +5,16 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin' // 抽离 css 文件�
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin' // 压缩 JS
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin' // 压缩 CSS
 import Md2HtmlWebpackPlugin from './app/scripts/md2html-webpack-plugin.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const ASSET_PATH = process.env.ASSET_PATH || '/'
 const __dirname = path.dirname('')
+
+console.log("ASSET_PATH", ASSET_PATH);
+
+
 
 const config = {
 
@@ -66,14 +73,25 @@ const config = {
         use: ['ts-loader']
       },
       {
-        test: /\.(jpg|png|gif|jpeg|bmp|eot|svg|ttf|woff|woff2)$/,
+        test: /\.(jpg|png|gif|jpeg|bmp|svg)$/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 50 * 1024,
-            outputPath: './',
+            limit: 500 * 1024,
+            outputPath: './assets',
           }
         }
+      },
+      {
+        test: /\.(woff|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            }
+          }
+        ]
       }
     ]
   },
@@ -95,25 +113,25 @@ const htmlWebpackPluginConfig = {
 
 const plugins = [ // 数组，放着所有 webpack 插件
   new webpack.DefinePlugin({
-    'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
+    'process.env.ASSET_PATH': JSON.stringify('http://localhost:8020'),
   }),
-  // new HtmlWebpackPlugin({
-  //   template: './app/index.html',
-  //   filename: 'md.html',
-  //   hash: true,
-  //   chunks: ['index'],
-  //   body: '<%=Md2HtmlWebpackPlugin.body%>',
-  //   keywords: '<%=Md2HtmlWebpackPlugin.keywords%>',
-  //   description: '<%=Md2HtmlWebpackPlugin.description%>'
-  // }),
+  new HtmlWebpackPlugin({
+    template: './app/index.html',
+    filename: 'md.html',
+    hash: true,
+    chunks: ['index'],
+    body: '<%=Md2HtmlWebpackPlugin.body%>',
+    keywords: '<%=Md2HtmlWebpackPlugin.keywords%>',
+    description: '<%=Md2HtmlWebpackPlugin.description%>'
+  }),
   new MiniCssExtractPlugin({
     filename: '[name].min.css'
   }),
-  // new Md2HtmlWebpackPlugin({
-  //   template: 'dist/md.html',
-  //   input: 'app/article',
-  //   output: 'dist/article',
-  // })
+  new Md2HtmlWebpackPlugin({
+    template: 'dist/md.html',
+    input: 'app/test',
+    output: 'dist/article',
+  })
 ]
 
 const devServer = {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="<%=htmlWebpackPlugin.options.keywords%>" />
+  <meta name="description" content="<%=htmlWebpackPlugin.options.description%>" />
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- External CSS -->
+  <title>Alvin's Blog</title>
+</head>
+
+<body>
+  <header id="header">
+    <%=htmlWebpackPlugin.options.header%>
+  </header>
+  <div id="banner" class="banner"></div>
+  <div class="content">
+    <aside id="leftSidebar" class="aside-left"><%=htmlWebpackPlugin.options.leftSidebar%></aside>
+    <main id="main" class="main"><%=htmlWebpackPlugin.options.body%></main>
+    <aside id="rightAside" class="aside-right"><%=htmlWebpackPlugin.options.rightAside%></aside>
+  </div>
+</body>
+
+</html>

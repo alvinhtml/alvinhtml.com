@@ -1,0 +1,30 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video { margin: 0; padding: 0 }
+article, aside, dialog, figure, footer, header, hgroup, nav, section { display: block }
+blockquote, q { quotes: none }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+img {
+  vertical-align: top; border: none;
+}
+abbr, dfn {
+  border-bottom: 1px dotted #777;
+  cursor: help;
+}
+select, input, textarea, button {
+  vertical-align: middle;
+  z-index: 2;
+  margin: 0;
+}
+input[type="radio"], input[type="checkbox"] { margin: -2px 0 1px; }
+
+a:focus {
+  outline: thin dotted #373d41;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+a:hover,
+a:active {
+  outline: 0;
+}

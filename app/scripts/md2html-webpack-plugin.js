@@ -65,6 +65,7 @@ class md2htmlWebpackPlugin {
 
     // console.log(`\n${colors('green', input)} -> ${colors('green', output)}\n`);
 
+    mkdirsSync(path.resolve(output))
     await this.walk(input)
   }
 
@@ -84,7 +85,6 @@ class md2htmlWebpackPlugin {
             mkdirsSync(targetPath)
           }
 
-          console.log("folder:", file);
           this.walk(path.join(dir, file))
         } else {
           this.createHtml(currentPath)
@@ -100,7 +100,7 @@ class md2htmlWebpackPlugin {
 
     const mdContent = fs.readFileSync(filePath, 'utf8')
 
-    console.log("mdContent", mdContent)
+    // console.log("mdContent", mdContent)
 
     // 使用正则匹配出SEO关键字
     const result = mdContent.match(/## Keywords(\s)+(\s*(- ([\w]+))(\s)*)+/g)
@@ -108,21 +108,21 @@ class md2htmlWebpackPlugin {
 
     let htmlContent = marked(mdContent)
 
-    console.log("micromark", htmlContent)
+    // console.log("micromark", htmlContent)
 
     htmlContent = this.template
       // 替换SEO关键字
       .replace('<%=Md2HtmlWebpackPlugin.keywords%>', keywords)
-      .replace('<%=Md2HtmlWebpackPlugin.body%>', htmlContent)
+      .replace('<%=Md2HtmlWebpackPlugin.body%>', `<section id="markdownSection" class="markdown-section">${htmlContent}</section>`)
 
-    console.log("htmlContent", htmlContent)
+    // console.log("htmlContent", htmlContent)
 
-    console.log("currentPath.replace(input, output)", filePath.replace(input, output));
+    // console.log("currentPath.replace(input, output)", filePath.replace(input, output));
 
     const newFile = filePath.replace(input, output).replace(/\.md$/, '.html');
-    console.log("newFile", newFile);
+    // console.log("newFile", newFile);
 
-    fs.writeFileSync(newFile, `<section class="markdown-section">${htmlContent}</section>`)
+    fs.writeFileSync(newFile, htmlContent)
 
   }
 

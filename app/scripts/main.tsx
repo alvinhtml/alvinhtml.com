@@ -1,21 +1,34 @@
-// // 实现一个简单的 React createElement 功能
-import React from './react/react'
-//
-// 实现 ReactDOM 的 render 功能
-import ReactDOM from './react/react-dom'
-//
-// import Header from './components/header'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 
+
+import Header from './components/header'
+import Banner from './components/banner'
+import LeftSidebar from './components/leftSidebar'
+// import Content from './components/content'
+
+
+// import "@fortawesome/fontawesome-free/js/all.js";
+// import "@fortawesome/fontawesome-free/css/all.css";
+
+// import 'react-miniui/dist/miniui.css'
 import '../styles/main'
 import '../styles/style'
 import 'highlight.js/styles/atom-one-light'
 
-console.log("React", React);
 
-function Main() {
-  return (
-    <div><strong>hello world</strong></div>
-  )
-}
+// console.log("React", React);
 
-ReactDOM.render(<Main />, document.querySelector('#root'))
+// function Main() {
+//   return (
+//     <div>
+//
+//       <Banner />
+//       <Content />
+//     </div>
+//   )
+// }
+
+ReactDOM.render(<Header />, document.querySelector('#header'))
+ReactDOM.render(<Banner />, document.querySelector('#banner'))
+ReactDOM.render(<LeftSidebar />, document.querySelector('#leftSidebar'))

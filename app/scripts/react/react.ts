@@ -1,18 +1,21 @@
-// interface Attr {
-//   [key in string]: any
-// }
+import Component from './component'
+
 
 type Child = Node | string
 
+
 const React = {
-  createElement
+  createElement,
+  Component
 }
 
 function createElement(tag, attrs, ...children) {
+  attrs = attrs || {}
   return {
     tag,
     attrs,
-    children
+    children: children.flat(),
+    key: attrs.key || null
   }
 }
 
