@@ -8,19 +8,20 @@
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <!-- External CSS -->
-  <title>Alvin's Blog</title>
+  <title><%=htmlWebpackPlugin.options.title%></title>
 </head>
 
 <body>
   <header id="header">
     <%=htmlWebpackPlugin.options.header%>
   </header>
-  <div id="banner" class="banner"></div>
+  <div id="banner" class="banner">
+    <%=htmlWebpackPlugin.options.banner%>
+  </div>
   <div class="content">
-    <aside id="leftSidebar" class="aside-left"><%=htmlWebpackPlugin.options.leftSidebar%></aside>
+    <aside id="asideLeft" class="aside-left"><%=htmlWebpackPlugin.options.left%></aside>
     <main id="main" class="main"><%=htmlWebpackPlugin.options.body%></main>
-    <aside id="rightAside" class="aside-right"><%=htmlWebpackPlugin.options.rightAside%></aside>
+    <aside id="asideRight" class="aside-right"><%=htmlWebpackPlugin.options.right%></aside>
   </div>
 </body>
 

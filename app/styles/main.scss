@@ -4,10 +4,17 @@ $gray-dark: #525F7F;
 $background-hover: rgba(0, 0, 0, 0.1);
 $background: rgba(255, 255, 255, 0.95);
 
-@import url('font-awesome/css/font-awesome.css');
-@import './base.scss';
+$themecolor: #328b6c;
+$themecolor-dark0: #2F8265;
+$themecolor-dark: #2B785D;
+$themecolor-dark2: #25654F;
+$themecolor-dark3: #1E5340;
+$themecolor-light: #3FB189;
 
-html, body{
+@import url('font-awesome/css/font-awesome.css');
+@import 'base.scss';
+
+html, body {
   scroll-behavior: smooth;
 }
 
@@ -17,7 +24,7 @@ html, body{
 
 body {
   font-family: 'Open Sans', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
-  font-size: .875rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
@@ -25,12 +32,16 @@ body {
   color: $gray-dark;
 }
 
-header {
+body>header {
+  min-height: 85px;
+
   nav {
     box-sizing: border-box;
     padding: 1rem;
     width: 100%;
     z-index: 3;
+    transition: background-color .3s, padding .3s ease;
+    position: fixed;
 
     .container {
       padding: 0 15px;
@@ -188,20 +199,18 @@ header {
 }
 
 .banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: $white;
   text-align: center;
-  min-height: 120px;
+  padding: 2em;
+}
 
-  .banner-title {
-    font-size: 1.8em;
-  }
+.banner-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
 
-  .banner-subtitle {
-    font-size: 0.75rem;
-  }
+.banner-subtitle {
+  font-size: 0.75rem;
 }
 
 .content {
@@ -214,7 +223,7 @@ header {
     top: 0;
     bottom: 0;
     z-index: -2;
-    background: url(https://cdn.jsdelivr.net/gh/echeverra/img@main/resource/background.jpg);
+    background-image: url('./../images/theme/background.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -231,16 +240,54 @@ header {
     margin: 0 0.8rem;
 
     &.aside-left {
+      .sidebar-banner {
+        background: linear-gradient(150deg, $themecolor-light 15%, $themecolor 70%, $themecolor-dark0 94%);
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        padding: 1rem;
+      }
+      .sidebar-menu {
+        padding: 1rem 0;
+
+        ul {
+          list-style: none;
+
+          .dropdown-menu {
+            a {
+              padding-left: 3rem;
+            }
+          }
+
+          a {
+            display: block;
+            font-size: .9rem;
+            padding: 0.5rem 2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            word-break: break-all;
+            width: 100%;
+            overflow-x: hidden;
+            white-space: nowrap;
+            color: $dark;
+            text-decoration: none;
+            box-sizing: border-box;
+
+            &:hover {
+              background-color: $background-hover;
+            }
+          }
+        }
+      }
       .catalog {
         width: 250px;
-        padding: 1em;
+        padding: 1rem;
         box-sizing: border-box;
-        max-height: calc(100vh - 40px);
+        max-height: calc(100vh - 100px);
         overflow-y: auto;
 
         &.fixed {
           position: fixed;
-          top: 20px;
+          top: 85px;
         }
         ul {
           li {
@@ -260,7 +307,6 @@ header {
               padding: 4px 8px 4px 8px;
               cursor: pointer;
               transition: background-color 0.3s ease;
-              border-left: 3px solid transparent;
               word-break: break-all;
               border-radius: 3px;
               width: 100%;
@@ -280,7 +326,48 @@ header {
     }
 
     &.aside-right {
+      .card {
+        padding: 2rem;
 
+        .avator {
+          width: 100px;
+          height: 100px;
+          overflow: hidden;
+          border-radius: 100px;
+          margin: 0 auto;
+
+          img {
+            width: 100px;
+          }
+        }
+
+        .name {
+          font-size: 1.2rem;
+          text-align: center;
+          margin: 1rem 0;
+        }
+
+        .site-state {
+          display: flex;
+          justify-content: space-around;
+          margin: 1rem;
+
+          .item {
+            text-align: center;
+            border-left: 1px solid #eee;
+            padding: 0 .5rem;
+
+            &:first-child {
+              border: 0;
+            }
+
+            strong, span {
+              font-size: 13px;
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -310,6 +397,35 @@ header {
   background: $background;
   box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
   border-radius: 4px;
+  margin-bottom: 1rem;
+
+  &.article {
+    line-height: 1.7;
+
+    h1 {
+      font-size: 26px;
+      letter-spacing: .5px;
+      transition: all .35s ease;
+      color: $themecolor;
+      word-wrap: break-word;
+      text-align: center;
+      font-weight: 400;
+
+      &:hover {
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  &.home-item {
+    h1 {
+      margin-top: 0 !important;
+    }
+
+    .tags {
+      display: none;
+    }
+  }
 }
 
 .markdown-section {

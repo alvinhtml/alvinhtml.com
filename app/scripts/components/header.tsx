@@ -1,7 +1,9 @@
 import React, { Component, createRef } from 'react'
 
+import Menu from './Menu'
+
 export default class Header extends Component {
-  search = createRef<HTMLDivElement>()
+  nav = createRef<HTMLElement>()
   state = {
     searchOpened: false
   }
@@ -21,37 +23,48 @@ export default class Header extends Component {
     })
   }
 
+  componentDidMount() {
+    const naver = this.nav.current
+
+    if (naver) {
+      const easeOut = (t: number, b: number, c: number, d: number) => {
+        return c * (t /= d) * t + b
+      }
+
+      if (document.documentElement.scrollTop > 250) {
+        naver.style.backgroundColor = `rgba(50, 139, 108, 1)`
+      }
+
+      window.addEventListener('scroll', (e) => {
+        if (document.documentElement.scrollTop < 250) {
+          naver.style.backgroundColor = `rgba(50, 139, 108, ${easeOut(document.documentElement.scrollTop, 0, 200, 200) / 200})`
+        }
+
+        if (document.documentElement.scrollTop > 0) {
+          naver.style.padding = '0.5rem 1rem'
+        } else {
+          naver.style.padding = '1rem'
+        }
+      })
+    }
+  }
+
+  componentWillUnmount() {
+
+  }
+
   render() {
     const {searchOpened} = this.state
 
     return (
-      <nav>
+      <nav ref={this.nav}>
         <div className="container">
           <div className="navbar-brand"><a href="">Alvin</a></div>
           <div className="navbar-collapse">
-            <ul>
-              <li>
-                <a href=""><i className="fa fa-home" /> 首页</a>
-              </li>
-              <li>
-                <a href=""><i className="fa fa-bookmark" /> 文章</a>
-                <div className="dropdown-menu">
-                  <a className="dropdown-item" href=""><i className="fa fa-code" /> 前端</a>
-                  <a className="dropdown-item" href=""><i className="fa fa-code" /> 后端</a>
-                  <a className="dropdown-item" href=""><i className="fa fa-code" /> 算法</a>
-                  <a className="dropdown-item" href=""><i className="fa fa-code" /> 计算机</a>
-                </div>
-              </li>
-              <li>
-                <a href="">项目</a>
-              </li>
-              <li>
-                <a href="">笔记</a>
-              </li>
-            </ul>
+            <Menu />
             <ul>
               <li style={{position: 'relative'}}>
-                <div className={`header-search ${searchOpened ? 'opened' : ''}`} ref={this.search}>
+                <div className={`header-search ${searchOpened ? 'opened' : ''}`}>
                   <span><i className="fa fa-search" /></span>
                   <input placeholder="搜索什么..." onFocus={this.handleClick.bind(this)} onBlur={this.handleBlur.bind(this)} type="text"/>
                 </div>

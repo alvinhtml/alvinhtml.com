@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 
 export default class LeftSidebar extends Component {
+
+  catalog = createRef<HTMLDivElement>()
+
   state: {
-    nav: Array<any>
+    catalogs: Array<any>
   }
+
   constructor(props) {
     super(props)
     this.state = {
-      nav: []
+      catalogs: []
     }
   }
 
@@ -16,6 +20,7 @@ export default class LeftSidebar extends Component {
     if (markdownSection) {
       const children = markdownSection.children
 
+      // 提取标题，并转化为树结构
       const items = Array.from(children)
         .filter((item: Element) => item instanceof HTMLHeadingElement)
         .map((item: Element) => {
@@ -53,32 +58,47 @@ export default class LeftSidebar extends Component {
       }
 
       const res = toTree(items, 2)
-      console.log("res", res);
 
       this.setState({
-        nav: res
+        catalogs: res
       })
 
+
+
       setTimeout(() => {
-        const catalogBox: HTMLDivElement | null = document.querySelector('#catalogBox')
-        if (catalogBox) {
-          const rect: DOMRect | null = catalogBox.getBoundingClientRect()
+        const catalog = this.catalog.current
+        const rect: DOMRect | undefined = catalog?.getBoundingClientRect()
+
+        if (catalog && rect) {
+          const top = document.documentElement.scrollTop + rect.top
+          // console.log("rect", rect, document.documentElement.scrollTop);
+
+          if (document.documentElement.scrollTop > (top - 80)) {
+            catalog.classList.add('fixed')
+          } else {
+            catalog.classList.remove('fixed')
+          }
 
           window.addEventListener('scroll', (e) => {
-            if (rect) {
-              if (document.documentElement.scrollTop > (rect.y - 20)) {
-                catalogBox.classList.add('fixed')
-              } else {
-                catalogBox.classList.remove('fixed')
-              }
+            // console.log("top", top, document.documentElement.scrollTop);
+
+            if (document.documentElement.scrollTop > (top - 80)) {
+              catalog.classList.add('fixed')
+            } else {
+              catalog.classList.remove('fixed')
             }
           })
         }
-      }, 300)
+      }, 500)
     }
   }
 
   render() {
+
+    if (this.state.catalogs.length < 1) {
+      return null
+    }
+
     const renderCatalog = list => {
       if (list.length > 0) {
         return (
@@ -101,8 +121,8 @@ export default class LeftSidebar extends Component {
     }
 
     return (
-      <div className="card catalog" id="catalogBox">
-        {renderCatalog(this.state.nav)}
+      <div className="card catalog" ref={this.catalog}>
+        {renderCatalog(this.state.catalogs)}
       </div>
     )
   }

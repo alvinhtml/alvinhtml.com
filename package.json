@@ -6,12 +6,11 @@
   "directories": {
     "test": "test"
   },
-  "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development webpack serve --mode development",
     "start": "NODE_ENV=development webpack serve --mode development",
     "lint": "npx eslint app/**/*.ts",
-    "build": "rm -rf dist && NODE_ENV=production webpack --mode production"
+    "build": "NODE_ENV=production webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -28,8 +27,13 @@
   "homepage": "https://github.com/alvinhtml/alvinhtml.com#readme",
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-regenerator": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.15.0",
     "@babel/register": "^7.15.3",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
@@ -40,6 +44,7 @@
     "css-loader": "^6.2.0",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
+    "file-loader": "^6.2.0",
     "highlight.js": "^11.2.0",
     "html-minifier": "^4.0.0",
     "html-webpack-plugin": "^5.3.2",
