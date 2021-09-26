@@ -9,7 +9,7 @@ export default class Menu extends Component {
         <li>
           <a href="/index.html"><i className="fa fa-fw fa-home" /> 首页</a>
         </li>
-        
+
         <li>
           <a><i className="fa fa-fw fa-bookmark" /> 文章</a>
           <div className="dropdown-menu">
@@ -25,7 +25,7 @@ export default class Menu extends Component {
         </li>
 
         <li>
-          <a href="">< i className="fa fa-fw fa-book" /> 笔记</a>
+          <a href="http://note.alvinhtml.com/" target="_blank">< i className="fa fa-fw fa-book" /> 笔记</a>
         </li>
       </ul>
     )
