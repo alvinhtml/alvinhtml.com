@@ -18,7 +18,7 @@ html, body {
   scroll-behavior: smooth;
 }
 
-.fa{
+.fa {
   font-family: FontAwesome !important;
 }
 
@@ -214,6 +214,7 @@ body>header {
 }
 
 .content {
+
   &::before {
     content: '';
     display: block;
@@ -374,6 +375,7 @@ body>header {
   main {
     flex: 1 1 100%;
     margin: 0 0.8rem;
+    overflow-x: hidden;
 
     article.article {
       header {
@@ -415,6 +417,7 @@ body>header {
         letter-spacing: 1px;
       }
     }
+
   }
 
   &.home-item {

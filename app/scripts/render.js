@@ -23,9 +23,10 @@ function Sidebar() {
 const header = renderToStaticMarkup(<Header />)
 const banner = renderToStaticMarkup(<Banner />)
 const sidebar = renderToStaticMarkup(<Sidebar />)
-const rightSidebar = renderToStaticMarkup(<RightSidebar />)
+const rightSidebar = renderToStaticMarkup(<RightSidebar />).replace('[object Object]', '')
 
 
+console.log("header", header);
 
 //
 // const header = 1

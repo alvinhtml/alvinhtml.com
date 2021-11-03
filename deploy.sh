@@ -9,6 +9,5 @@ des=/home/wwwroot/alvinhtml/
 now=`date +"%Y-%m-%d %H:%M:%S"`
 
 echo "将 $src 目录下的文件同步到 $host:$des 目录下"
-ssh -p $port $user@$host "cd $des && rm -f *.*"
 rsync -zrc -e "ssh -p $port" --exclude '*.map' $src $user@$host:$des
 echo "$now update $host $des code"

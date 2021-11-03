@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import avator from '../../images/theme/avator.jpg'
+import avator from '../../images/theme/avator-me.jpg'
 
 export default class RightSidebar extends Component {
   state: {
