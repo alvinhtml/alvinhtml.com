@@ -166,8 +166,8 @@ class md2htmlWebpackPlugin {
     let htmlContent = marked(mdContent)
 
     // 匹配出第一个 <h1> 和第一个 <P>, 作为标题和摘要
-    const titleReg = new RegExp('<h1[^>]+>([^<]+)<\/h1>', 'g')
-    const descReg = new RegExp('<p>([^<]+)<\/p>', 'g')
+    const titleReg = new RegExp('<h1[^>]+>([^<]+)</h1>', 'g')
+    const descReg = new RegExp('<p>([^<]+)</p>', 'g')
     const titleResult = titleReg.exec(htmlContent)
     const descResult = descReg.exec(htmlContent)
 
