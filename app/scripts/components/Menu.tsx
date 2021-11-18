@@ -14,9 +14,10 @@ export default class Menu extends Component {
           <a><i className="fa fa-fw fa-bookmark" /> 文章</a>
           <div className="dropdown-menu">
             <a className="dropdown-item" href="/article/web.html"><i className="fa fa-fw fa-html5" /> 前端</a>
-            <a className="dropdown-item" href="/article/developer.html"><i className="fa fa-fw fa-server" /> 后端</a>
+            <a className="dropdown-item" href="/article/developer.html"><i className="fa fa-fw fa-server" /> 开发者</a>
             <a className="dropdown-item" href="/article/algorithm.html"><i className="fa fa-fw fa-code" /> 算法</a>
-            <a className="dropdown-item" href="/article/computer.html"><i className="fa fa-fw fa-linux" /> 计算机</a>
+            <a className="dropdown-item" href="/article/computer.html"><i className="fa fa-fw fa-desktop" /> 计算机</a>
+            <a className="dropdown-item" href="/article/linux.html"><i className="fa fa-fw fa-linux" /> Linux</a>
           </div>
         </li>
 

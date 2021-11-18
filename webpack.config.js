@@ -32,8 +32,14 @@ const webpack = require('webpack') // webpack 插件
 const dotenv = require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽离 css 文件，使用这个插件需要单独配置 JS 和 CSS 压缩
+const FileManagerPlugin = require('filemanager-webpack-plugin')
 const Md2HtmlWebpackPlugin = require('./app/scripts/md2html-webpack-plugin.js')
-const { header, banner, sidebar, rightSidebar } = require('./app/scripts/render.js')
+const {
+  header,
+  banner,
+  sidebar,
+  rightSidebar
+} = require('./app/scripts/render.js')
 
 const ASSET_PATH = process.env.ASSET_PATH || '/'
 
@@ -172,6 +178,19 @@ if (process.env.NODE_ENV === 'production') {
     output: 'dist/article',
   })
   plugins.push(new HtmlWebpackPlugin(htmlWebpackPluginConfig))
+  plugins.push(new FileManagerPlugin({
+    events: {
+      onEnd: {
+        copy: [{
+            source: path.resolve(__dirname, 'app/images'),
+            destination: path.resolve(__dirname, 'dist/images')
+        },{
+            source: path.resolve(__dirname, 'app/images/theme/favicon.png'),
+            destination: path.resolve(__dirname, 'dist/favicon.png')
+        }]
+      }
+    }
+  }))
   plugins.push(md2HtmlPlugin)
 } else {
   plugins.push(new HtmlWebpackPlugin(htmlWebpackPluginConfig))
