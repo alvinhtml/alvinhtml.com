@@ -25,15 +25,6 @@ const banner = renderToStaticMarkup(<Banner />)
 const sidebar = renderToStaticMarkup(<Sidebar />)
 const rightSidebar = renderToStaticMarkup(<RightSidebar />).replace('[object Object]', '')
 
-
-console.log("header", header);
-
-//
-// const header = 1
-// const banner = 2
-// const sidebar = 3
-// const rightSidebar = 4
-
 module.exports = {
   header,
   banner,

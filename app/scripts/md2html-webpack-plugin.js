@@ -61,8 +61,7 @@ class md2htmlWebpackPlugin {
     const {
       template,
       input,
-      output,
-      options
+      output
     } = this.options
 
     this.template = fs.readFileSync(this.options.template, 'utf8')
@@ -72,7 +71,7 @@ class md2htmlWebpackPlugin {
     // console.log(`\n${colors('green', input)} -> ${colors('green', output)}\n`);
 
     mkdirsSync(path.resolve(output))
-    const walked = await this.walk(input)
+    await this.walk(input)
 
     // console.log("walked", walked);
     // console.log("statistics", statistics);
@@ -119,7 +118,7 @@ class md2htmlWebpackPlugin {
 
       const asyncQueue = []
 
-      await files.forEach((file, i) => {
+      await files.forEach((file) => {
         const currentPath = path.join(dir, file)
         const isDirectory = fs.lstatSync(currentPath).isDirectory()
         if (isDirectory) {
@@ -153,15 +152,22 @@ class md2htmlWebpackPlugin {
     // console.log("mdContent", mdContent)
 
     // 使用正则匹配出SEO关键字
-    const result = mdContent.match(/## Keywords(\s)+(\s*(- ([\w]+))(\s)*)+/g)
+    // const result = mdContent.match(/## Keywords(\s)+(\s*(- ([\w]+))(\s)*)+/g)
+    // let keywords = []
+    //
+    // if (result) {
+    //   keywords = result[0].match(/(?<=- )([\w]+)/g)
+    //   statistics.keywords.push(...keywords)
+    // }
+
+    const result = mdContent.match(/## Keywords(\s)+(`.+`)+/g)
+
     let keywords = []
 
     if (result) {
-      keywords = result[0].match(/(?<=- )([\w]+)/g)
+      keywords = result[0].match(/`([^`]+)`/g).map(s => s.slice(1, -1))
       statistics.keywords.push(...keywords)
     }
-
-
 
     let htmlContent = marked(mdContent)
 

@@ -2,6 +2,7 @@
 
 ## 2021
 
+- [使用 Node.js 开发一个 Linux 命令行工具](/article/linux/linux-command-by-nodejs.html)
 - [vite 中配置 proxy 代理 https](/article/web/vite-proxy-https.html)
 
 ## 2015

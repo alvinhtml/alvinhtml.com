@@ -416,6 +416,4 @@ for (let node of walkPreOrder(root)) {
 
 ## Keywords
 
-- 数据结构
-- 二叉树
-- 遍历
+`数据结构` `二叉树` `遍历`

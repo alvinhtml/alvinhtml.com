@@ -57,6 +57,4 @@ export default defineConfig({
 
 ## Keywords
 
-- vite
-- proxy
-- https
+`vite` `proxy` `https`

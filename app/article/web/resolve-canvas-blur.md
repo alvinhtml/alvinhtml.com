@@ -71,3 +71,7 @@ context.translate(Math.floor(x),Math.floor(y))
 ```
 
 关于Canvas画图模糊问题，我暂时只发现了这些，如果你还知道其它可能，欢迎留言补充。
+
+## Keywords
+
+`canvas` `模糊`

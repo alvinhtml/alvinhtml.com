@@ -319,5 +319,4 @@ const array2 = [...list]
 
 ## Keywords
 
-- JavaScript
-- 链表
+`JavaScript` `链表`

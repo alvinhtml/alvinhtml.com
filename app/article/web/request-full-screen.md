@@ -111,3 +111,7 @@ document.addEventListener("webkitfullscreenchange", function () {
 ```js
 docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
 ```
+
+## Keywords
+
+`全屏` `requestFullscreen` `exitFullscreen`
