@@ -320,3 +320,8 @@ const array2 = [...list]
 ## Keywords
 
 `JavaScript` `链表`
+
+<!-- author alvin -->
+<!-- email alvinhtml@gmail.com -->
+<!-- createAt 2021-11-19 20:00:00 -->
+<!-- updateAt 2021-11-19 20:00:00 -->

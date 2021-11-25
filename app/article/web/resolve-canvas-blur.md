@@ -75,3 +75,8 @@ context.translate(Math.floor(x),Math.floor(y))
 ## Keywords
 
 `canvas` `模糊`
+
+<!-- author alvin -->
+<!-- email alvinhtml@gmail.com -->
+<!-- createAt 2016-05-18 20:00:00 -->
+<!-- updateAt 2016-05-18 20:00:00 -->

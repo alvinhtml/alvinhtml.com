@@ -66,21 +66,13 @@ class md2htmlWebpackPlugin {
 
     this.template = fs.readFileSync(this.options.template, 'utf8')
 
-    // console.log('\nReading html file...\n');
-    // const contentHtml = fs.readFileSync(input, 'utf8')
-    // console.log(`\n${colors('green', input)} -> ${colors('green', output)}\n`);
-
     mkdirsSync(path.resolve(output))
     await this.walk(input)
-
-    // console.log("walked", walked);
-    // console.log("statistics", statistics);
-
 
     statistics.keywords = Array.from(new Set(statistics.keywords))
     statistics.articleCount = statistics.articles.length
     statistics.articles = statistics.articles.sort((a, b) => {
-      return a.createAt - b.createAt
+      return b.createAt - a.createAt
     })
 
     fs.writeFileSync(path.join(output, 'articles.json'), JSON.stringify(statistics, null, 2))
@@ -111,10 +103,10 @@ class md2htmlWebpackPlugin {
 
   async walk(dir) {
     const {input, output} = this.options
+    const category = path.basename(dir)
 
     try {
       const files = await readdir(dir)
-      console.log("files", files)
 
       const asyncQueue = []
 
@@ -131,7 +123,7 @@ class md2htmlWebpackPlugin {
 
           asyncQueue.push(this.walk(path.join(dir, file)))
         } else {
-          asyncQueue.push(this.createHtml(currentPath))
+          asyncQueue.push(this.createHtml(currentPath, category))
         }
       })
 
@@ -143,22 +135,18 @@ class md2htmlWebpackPlugin {
     }
   }
 
-  async createHtml(filePath) {
-    console.log(`\n${colors('yellow', 'Start creating HTML')}:`, filePath)
+  async createHtml(filePath, category) {
+    // console.log(`\n${colors('yellow', 'Start creating HTML')}:`, filePath)
+
+    if (!/\.md$/.test(filePath)) {
+      return false
+    }
+
     const {input, output} = this.options
 
     const mdContent = fs.readFileSync(filePath, 'utf8')
 
     // console.log("mdContent", mdContent)
-
-    // 使用正则匹配出SEO关键字
-    // const result = mdContent.match(/## Keywords(\s)+(\s*(- ([\w]+))(\s)*)+/g)
-    // let keywords = []
-    //
-    // if (result) {
-    //   keywords = result[0].match(/(?<=- )([\w]+)/g)
-    //   statistics.keywords.push(...keywords)
-    // }
 
     const result = mdContent.match(/## Keywords(\s)+(`.+`)+/g)
 
@@ -180,7 +168,15 @@ class md2htmlWebpackPlugin {
     const title = titleResult ? titleResult[1] : ''
     const desc = descResult ? descResult[1] : ''
 
-    const fStat = fs.statSync(filePath)
+    let createAt
+
+    const createAtResult = mdContent.match(/<!-- createAt ([\d-:]+ [\d-:]+) -->/)
+
+    try {
+      createAt = new Date(createAtResult[1]).getTime()
+    } catch(err) {
+      createAt = fs.statSync(filePath).ctimeMs || ''
+    }
 
     const link = filePath.replace(path.dirname(input), '').replace(/\.md$/, '.html')
 
@@ -188,9 +184,10 @@ class md2htmlWebpackPlugin {
       const article = {
         title,
         desc,
+        category,
         keywords,
         link,
-        createAt: fStat.ctimeMs || 0
+        createAt
       }
 
       statistics.articles.push(article)
@@ -212,14 +209,14 @@ class md2htmlWebpackPlugin {
 
     fs.writeFileSync(newFile, htmlContent)
 
-    console.log('HTML created successfully:', `${colors('green', filePath)}\n`)
+    console.log('HTML created successfully:', `${colors('green', filePath)}`)
   }
 
   apply(compiler) {
     console.log('\nStart conversion...\n')
     const onEnd = async () => {
       await this.start();
-      console.log('Conversion complete!\n')
+      console.log('\nConversion complete!\n')
     };
 
     // 在构建完成后打包

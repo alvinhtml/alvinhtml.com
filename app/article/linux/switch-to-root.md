@@ -53,3 +53,8 @@ exit
 ## Keywords
 
 `linux` `root` `su` `sudo` `管理员权限` `切换`
+
+<!-- author alvin -->
+<!-- email alvinhtml@gmail.com -->
+<!-- createAt 2021-11-18 20:00:00 -->
+<!-- updateAt 2021-11-18 20:00:00 -->

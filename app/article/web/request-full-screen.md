@@ -115,3 +115,8 @@ docElm.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
 ## Keywords
 
 `全屏` `requestFullscreen` `exitFullscreen`
+
+<!-- author alvin -->
+<!-- email alvinhtml@gmail.com -->
+<!-- createAt 2016-07-12 20:00:00 -->
+<!-- updateAt 2016-07-12 20:00:00 -->

@@ -417,3 +417,8 @@ for (let node of walkPreOrder(root)) {
 ## Keywords
 
 `数据结构` `二叉树` `遍历`
+
+<!-- author alvin -->
+<!-- email alvinhtml@gmail.com -->
+<!-- createAt 2021-10-24 20:00:00 -->
+<!-- updateAt 2021-10-24 20:00:00 -->
