@@ -39,7 +39,7 @@ function mkdirsSync(dirname) {
 
 const statistics = {
   articleCount: 0,
-  categoryCount: 0,
+  categorys: [],
   keywords: [],
   articles: []
 }
@@ -49,7 +49,7 @@ class md2htmlWebpackPlugin {
 
     Object.assign({
       template: 'app/index.html',
-      input: 'app/blog',
+      input: 'app/article',
       output: 'dist',
       options: {}
     }, options);
@@ -78,18 +78,24 @@ class md2htmlWebpackPlugin {
     fs.writeFileSync(path.join(output, 'articles.json'), JSON.stringify(statistics, null, 2))
     // fs.writeFileSync(path.join(path.dirname(input), 'statistics.json'), JSON.stringify(statistics, null, 2))
 
-    let content = ''
+    statistics.categorys.forEach(category => {
+      const articles = statistics.articles.filter(article => article.category === category)
+      this.createArticlesHtml(path.join(output, `${category}.html`), articles)
+    })
 
-    for (let i = 0; i < 10 && i < statistics.articles.length; i++) {
-      const article = statistics.articles[i]
-      content += `
+    this.createArticlesHtml(path.join(path.dirname(template), 'index.html'), statistics.articles.slice(0, 20))
+  }
+
+  createArticlesHtml(filepath, articles) {
+    const content = articles.map((article) => {
+      return `
         <div class="markdown-section article home-item">
           <header><h1><a href="${article.link}">${article.title}</a></h1></header>
           <p>${article.desc}</p>
           <div class="tags">${article.createAt}</div>
         </div>
       `
-    }
+    }).join('')
 
     const htmlContent = this.template
       // 替换SEO关键字
@@ -98,7 +104,7 @@ class md2htmlWebpackPlugin {
       .replace('<%=Md2HtmlWebpackPlugin.description%>', '你爱谁如鲸向海的前端开发博客，分享前端开发和计算机相关的知识')
       .replace('<%=Md2HtmlWebpackPlugin.body%>', content)
 
-    fs.writeFileSync(path.join(path.dirname(template), 'index.html'), htmlContent)
+    fs.writeFileSync(filepath, htmlContent)
   }
 
   async walk(dir) {
@@ -119,7 +125,7 @@ class md2htmlWebpackPlugin {
           if (!fs.existsSync(targetPath)) {
             mkdirsSync(targetPath)
           }
-          statistics.categoryCount = statistics.categoryCount + 1
+          statistics.categorys.push(file)
 
           asyncQueue.push(this.walk(path.join(dir, file)))
         } else {
