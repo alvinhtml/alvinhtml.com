@@ -18,17 +18,17 @@ export default class RightSidebar extends Component {
   }
 
   componentDidMount() {
-    fetch('/article/articles.json', {
-
-    }).then((response) => {
-      return response.json()
-    }).then((data) => {
-      this.setState({
-        articleCount: data.articleCount,
-        categoryCount: data.categoryCount,
-        keywords: data.keywords.length,
+    fetch('/article/articles.json', {})
+      .then((response) => {
+        return response.json()
       })
-    })
+      .then((data) => {
+        this.setState({
+          articleCount: data.articleCount,
+          categoryCount: data.categorys.length,
+          keywords: data.keywords.length,
+        })
+      })
   }
 
   render() {
