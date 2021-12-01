@@ -2,6 +2,8 @@ import React, { Component, createRef } from 'react'
 
 import Menu from './Menu'
 
+import logo from '../../images/theme/logo.png'
+
 interface Article {
   title: string
   desc: string
@@ -17,7 +19,8 @@ interface IState {
 }
 
 export default class Header extends Component {
-  nav = createRef<HTMLElement>()
+  nav = createRef<HTMLDivElement>()
+  input = createRef<HTMLInputElement>()
   state = {
     searchOpened: false,
     articles: []
@@ -33,6 +36,11 @@ export default class Header extends Component {
     this.setState({
       searchOpened: true
     })
+    const input = this.input.current
+
+    if (input) {
+      input.focus()
+    }
   }
 
   handleBlur(e) {
@@ -66,23 +74,15 @@ export default class Header extends Component {
     const naver = this.nav.current
 
     if (naver) {
-      const easeOut = (t: number, b: number, c: number, d: number) => {
-        return c * (t /= d) * t + b
-      }
-
-      if (document.documentElement.scrollTop > 250) {
-        naver.style.backgroundColor = `rgba(50, 139, 108, 1)`
+      if (document.documentElement.scrollTop > 0) {
+        naver.classList.add('fixed')
       }
 
       window.addEventListener('scroll', (e) => {
-        if (document.documentElement.scrollTop < 250) {
-          naver.style.backgroundColor = `rgba(50, 139, 108, ${easeOut(document.documentElement.scrollTop, 0, 200, 200) / 200})`
-        }
-
         if (document.documentElement.scrollTop > 0) {
-          naver.style.padding = '0.5rem 1rem'
+          naver.classList.add('fixed')
         } else {
-          naver.style.padding = '1rem'
+          naver.classList.remove('fixed')
         }
       })
     }
@@ -124,22 +124,22 @@ export default class Header extends Component {
     const {searchOpened} = this.state
 
     return (
-      <nav ref={this.nav}>
+      <div className="following" ref={this.nav}>
         <div className="container">
-          <div className="navbar-brand"><a href="">Alvin</a></div>
-          <div className="navbar-collapse">
+          <nav>
+            <div className="logo">
+              <img src={logo} alt="alvin's blog - logo"/>
+            </div>
             <Menu />
-            <ul>
-              <li style={{position: 'relative'}}>
-                <div className={`header-search ${searchOpened ? 'opened' : ''}`}>
-                  <span><i className="fa fa-search" /></span>
-                  <input placeholder="搜索什么..." onChange={this.handleSearch.bind(this)} onFocus={this.handleClick.bind(this)} onBlur={this.handleBlur.bind(this)} type="text"/>
-                </div>
-              </li>
-            </ul>
-          </div>
+            <div className="search-box">
+              <div className={`search ${searchOpened ? 'opened' : ''}`}>
+                <span onClick={this.handleClick.bind(this)}><i className="fa fa-search" /></span>
+                <input ref={this.input} placeholder="搜索什么..." onChange={this.handleSearch.bind(this)} onBlur={this.handleBlur.bind(this)} type="text"/>
+              </div>
+            </div>
+          </nav>
         </div>
-      </nav>
+      </div>
     )
   }
 }

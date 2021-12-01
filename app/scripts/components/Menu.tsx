@@ -5,7 +5,7 @@ export default class Menu extends Component {
   render() {
 
     return (
-      <ul>
+      <ul className="menu">
         <li>
           <a href="/index.html"><i className="fa fa-fw fa-home" /> 首页</a>
         </li>
