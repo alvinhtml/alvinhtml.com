@@ -23,10 +23,9 @@ html, body {
 }
 
 body {
-  font-family: 'Open Sans', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
+  font-family: Consolas,Monaco,Tahoma,"Helvetica Neue",Helvetica,"Lucida Grande","Lantinghei SC","Open Sans","Microsoft YaHei",sans-serif;
+  line-height: 1.8;
+  font-weight: 300;
   margin: 0;
   text-align: left;
   color: $gray-dark;
@@ -176,6 +175,8 @@ body {
         justify-content: flex-end;
         align-items: center;
         transition: all .3s ease;
+        width: 39px;
+        background-color: rgba(255, 255, 255, 0);
 
         input {
           border: 0;
@@ -185,6 +186,7 @@ body {
           background: none;
           outline: none;
           color: $white;
+          transition: all .3s ease;
         }
 
         span {
@@ -239,8 +241,6 @@ body {
     max-width: 960px !important;
     text-align: center;
 
-
-
     .introduction {
       h1 {
         font-size: 3em;
@@ -266,33 +266,16 @@ body {
 }
 
 .content {
-
-  // &::before {
-  //   content: '';
-  //   display: block;
-  //   position: fixed;
-  //   left: 0;
-  //   right: 0;
-  //   top: 0;
-  //   bottom: 0;
-  //   z-index: -2;
-  //   background-image: url('./../images/theme/background.jpg');
-  //   background-position: center;
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  //   opacity: 1;
-  //   transition: opacity .5s ease;
-  // }
-
   display: flex;
   justify-content: space-between;
-  padding: 0.8em;
+  margin: 1rem;
 
   aside {
     flex: 0 0 250px;
-    margin: 0 0.8rem;
+    margin: 0 1rem;
 
     &.aside-left {
+      display: none;
       .sidebar-banner {
         background: linear-gradient(150deg, $themecolor-light 15%, $themecolor 70%, $themecolor-dark0 94%);
         border-top-left-radius: 4px;
@@ -380,7 +363,7 @@ body {
 
     &.aside-right {
       .card {
-        padding: 2rem;
+        box-shadow: -1px 0 0 rgba(34, 36, 38, 0.15);
 
         .avator {
           width: 100px;
@@ -424,61 +407,113 @@ body {
     }
   }
 
-  main {
-    flex: 1 1 100%;
-    margin: 0 0.8rem;
-    overflow-x: hidden;
+  .main {
+    flex: 1 0;
+    box-sizing: border-box;
+    .article {
+      margin-top: 60px;
+      padding: 4rem 1rem 0 10rem;
+      clear: both;
+      margin: 20px 0;
 
-    article.article {
-      header {
-        h1 {
-          a {
-            font-size: 26px;
-            letter-spacing: .5px;
-            transition: all .35s ease;
+      &.article-item {
+        padding-left: 260px;
+      }
 
-            &:hover {
-              letter-spacing: 1px;
-            }
+      h2 {
+        margin: 0.85rem 0;
+        font-weight: 300;
+        a {
+          color: black;
+          text-decoration: none;
+          font-size: 1.8rem;
+          transition: color .5s;
+          &:hover {
+            color: $themecolor;
           }
         }
       }
+
+      .date {
+        float: left;
+        margin-left: -160px;
+        width: 100px;
+        padding: 20px 0;
+        text-align: center;
+        background: $themecolor;
+        font-size: 2em;
+        color: $white;
+
+        small {
+          display: block;
+          font-size: .5em;
+          border-top: $white solid 1px;
+          width: 4em;
+          margin: auto;
+        }
+      }
+
+      .time {
+        color: #999;
+      }
+
+      .tags {
+        margin-top: .85em;
+
+        span {
+          margin: 0 0.5rem 0 0;
+          padding: 0.2rem 0.4rem;
+          background-color: #f7f7f7;
+          color: $gray-dark;
+          transition: background-color .5s;
+          font-size: .85em;
+          font-weight: 200;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #e7e7e7;
+          }
+        }
+      }
+
     }
+  }
+}
+
+.footer {
+  margin: 2rem 0;
+
+  text-align: center;
+  img {
+    width: 36px;
+    height: 36px;
+  }
+  p {
+    margin: 1rem 0;
+    color: #999;
+    font-size: .85rem;
   }
 }
 
 .card, .markdown-section {
   background: $background;
-  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
-  border-radius: 4px;
+  padding: 1rem;
   margin-bottom: 1rem;
 
-  &.article {
-    line-height: 1.7;
-
-    h1 {
-      font-size: 26px;
-      letter-spacing: .5px;
-      transition: all .35s ease;
-      color: $themecolor;
-      word-wrap: break-word;
-      text-align: center;
-      font-weight: 400;
-
-      &:hover {
-        letter-spacing: 1px;
-      }
-    }
-
+  h1, h2, h3, h4, h5 {
+    font-weight: 300 !important;
   }
 
-  &.home-item {
-    h1 {
-      margin-top: 0 !important;
-    }
+  h1 {
+    font-size: 2em;
+    letter-spacing: .5px;
+    transition: all .35s ease;
+    color: $themecolor;
+    word-wrap: break-word;
+    text-align: center;
 
-    .tags {
-      display: none;
+    &:hover {
+      letter-spacing: 1px;
     }
   }
 }

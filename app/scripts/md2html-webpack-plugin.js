@@ -88,11 +88,14 @@ class md2htmlWebpackPlugin {
 
   createArticlesHtml(filepath, articles) {
     const content = articles.map((article) => {
+      const date = new Date(article.createAt)
       return `
-        <div class="markdown-section article home-item">
-          <header><h1><a href="${article.link}">${article.title}</a></h1></header>
+        <div class="article article-item">
+          <div class="date">${date.getDate()}<small>${date.getFullYear()}.${date.getMonth() + 1}</small></div>
+          <div class="time">${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}</div>
+          <h2><a href="${article.link}">${article.title}</a></h2>
           <p>${article.desc}</p>
-          <div class="tags">${article.createAt}</div>
+          <div class="tags">${article.keywords.map(k => `<span>${k}</span>`).join('')}</div>
         </div>
       `
     }).join('')
