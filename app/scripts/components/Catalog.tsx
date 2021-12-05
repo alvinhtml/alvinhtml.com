@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react'
 
-export default class LeftSidebar extends Component {
+export default class Catalog extends Component {
 
   catalog = createRef<HTMLDivElement>()
 
@@ -73,7 +73,7 @@ export default class LeftSidebar extends Component {
           const top = document.documentElement.scrollTop + rect.top
           // console.log("rect", rect, document.documentElement.scrollTop);
 
-          if (document.documentElement.scrollTop > (top - 80)) {
+          if (document.documentElement.scrollTop > (top - 62)) {
             catalog.classList.add('fixed')
           } else {
             catalog.classList.remove('fixed')
@@ -82,7 +82,7 @@ export default class LeftSidebar extends Component {
           window.addEventListener('scroll', (e) => {
             // console.log("top", top, document.documentElement.scrollTop);
 
-            if (document.documentElement.scrollTop > (top - 80)) {
+            if (document.documentElement.scrollTop > (top - 62)) {
               catalog.classList.add('fixed')
             } else {
               catalog.classList.remove('fixed')

@@ -109,11 +109,14 @@ export default class Header extends Component {
   renderSearchResult(articles: Array<Article>) {
     if (this.main && articles.length) {
       this.main.innerHTML = articles.map((article) => {
+        const date = new Date(article.createAt)
         return `
-          <div class="markdown-section article home-item">
-            <header><h1><a href="${article.link}">${article.title}</a></h1></header>
+          <div class="article article-item">
+            <div class="date">${date.getDate()}<small>${date.getFullYear()}.${date.getMonth() + 1}</small></div>
+            <div class="time">${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}</div>
+            <h2><a href="${article.link}">${article.title}</a></h2>
             <p>${article.desc}</p>
-            <div class="tags">${article.createAt}</div>
+            <div class="tags">${article.keywords.map(k => `<span>${k}</span>`).join('')}</div>
           </div>
         `
       }).join('')
@@ -128,7 +131,7 @@ export default class Header extends Component {
         <div className="container">
           <nav>
             <div className="logo">
-              <img src={logo} alt="alvin's blog - logo"/>
+              <a href=""><img src="/images/theme/logo.png" alt="logo"/></a>
             </div>
             <Menu />
             <div className="search-box">

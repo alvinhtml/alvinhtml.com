@@ -11,7 +11,7 @@ $themecolor-dark2: #25654F;
 $themecolor-dark3: #1E5340;
 $themecolor-light: #3FB189;
 
-@import url('font-awesome/css/font-awesome.css');
+@import url('fontello.css');
 @import 'base.scss';
 
 html, body {
@@ -47,8 +47,9 @@ body {
       background-color: $white;
       border-bottom: 1px solid #ddd;
 
-      nav .menu li a {
+      nav .menu li > a {
         color: $themecolor;
+        margin: 0 .5rem;
         &:hover {
           background-color: rgba(0,0,0,.05);
         }
@@ -97,7 +98,7 @@ body {
           font-size: 0.875rem;
           border-radius: 0.28571429rem;
           padding: 0.78571429em 0.92857143em;
-          margin: 0 0.5rem;
+          margin: 0 .5rem;
           text-decoration: none;
           color: $white;
           cursor: pointer;
@@ -231,8 +232,6 @@ body {
 
   .container {
     height: 55vh;
-    margin-left: auto !important;
-    margin-right: auto !important;
     min-height: 600px;
     align-items: center;
     display: flex;
@@ -267,21 +266,17 @@ body {
 
 .content {
   display: flex;
-  justify-content: space-between;
-  margin: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
 
-  aside {
-    flex: 0 0 250px;
-    margin: 0 1rem;
+  .aside {
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
 
     &.aside-left {
-      display: none;
-      .sidebar-banner {
-        background: linear-gradient(150deg, $themecolor-light 15%, $themecolor 70%, $themecolor-dark0 94%);
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        padding: 1rem;
-      }
+      flex-basis: 14rem;
+
       .sidebar-menu {
         padding: 1rem 0;
 
@@ -314,56 +309,16 @@ body {
           }
         }
       }
-      .catalog {
-        width: 250px;
-        padding: 1rem;
-        box-sizing: border-box;
-        max-height: calc(100vh - 100px);
-        overflow-y: auto;
 
-        &.fixed {
-          position: fixed;
-          top: 85px;
-        }
-        ul {
-          li {
-            width: 100%;
-            display: block;
-            color: $dark;
-            text-decoration: none;
-            box-sizing: border-box;
-
-            ul {
-              padding-left: 20px;
-            }
-
-            a {
-              display: block;
-              font-size: .9rem;
-              padding: 4px 8px 4px 8px;
-              cursor: pointer;
-              transition: background-color 0.3s ease;
-              word-break: break-all;
-              border-radius: 3px;
-              width: 100%;
-              overflow-x: hidden;
-              white-space: nowrap;
-              color: $dark;
-              text-decoration: none;
-              box-sizing: border-box;
-
-              &:hover {
-                background-color: $background-hover;
-              }
-            }
-          }
-        }
-      }
     }
 
     &.aside-right {
-      .card {
+      flex-basis: 20rem;
+
+      .prefile {
         box-shadow: -1px 0 0 rgba(34, 36, 38, 0.15);
+        margin-top: 4rem;
+        margin-left: 2rem;
 
         .avator {
           width: 100px;
@@ -403,22 +358,92 @@ body {
             }
           }
         }
+
+        .social-share {
+          display: flex;
+          justify-content: center;
+
+          a {
+            display: block;
+            margin: 1rem;
+            background-color: $themecolor;
+            color: $white;
+            width: 2rem;
+            height: 2rem;
+            line-height: 2rem;
+            text-align: center;
+            font-size: 1.15rem;
+            border-radius: 50%;
+
+            &.github {
+              background-color: #333333;
+            }
+
+            &.twitter {
+              background-color: #55acee;
+            }
+
+            &.facebook {
+              background-color: #3b5998;
+            }
+          }
+        }
+      }
+
+      .catalog {
+        margin-top: 0;
+        margin-left: 2rem;
+        overflow-y: auto;
+
+        &.fixed {
+          position: fixed;
+          top: 62px;
+        }
+
+        ul {
+          list-style: none;
+
+          li {
+
+            ul {
+              padding-left: 1rem;
+            }
+
+            a {
+              display: block;
+              font-size: .85rem;
+              cursor: pointer;
+              word-break: break-all;
+              line-height: 1;
+              width: 100%;
+              padding: .4rem;
+              overflow-x: hidden;
+              white-space: nowrap;
+              color: $dark;
+              text-decoration: none;
+              box-sizing: border-box;
+
+              &:hover {
+                color: $themecolor;
+              }
+            }
+          }
+        }
       }
     }
   }
 
   .main {
-    flex: 1 0;
-    box-sizing: border-box;
-    .article {
-      margin-top: 60px;
-      padding: 4rem 1rem 0 10rem;
-      clear: both;
-      margin: 20px 0;
+    flex-basis: 56rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-width: 56rem;
 
-      &.article-item {
-        padding-left: 260px;
-      }
+    .article {
+      margin-top: 4rem;
+      padding: 0 0 4rem 0;
+      clear: both;
+      width: 100%;
 
       h2 {
         margin: 0.85rem 0;

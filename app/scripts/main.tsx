@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 import Header from './components/Header'
 import Banner from './components/Banner'
-// import LeftSidebar from './components/LeftSidebar'
+import Catalog from './components/Catalog'
 import SidebarMenu from './components/SidebarMenu'
 import RightSidebar from './components/RightSidebar'
 // import Content from './components/content'
@@ -17,23 +17,22 @@ import RightSidebar from './components/RightSidebar'
 import '~/styles/main'
 import '~/styles/style'
 import 'highlight.js/styles/atom-one-light'
-import logo from '../images/theme/logo.png'
 
 // console.log("React", React);
 
-// function Sidebar() {
-//   return (
-//     <div>
-//       <SidebarMenu />
-//       <LeftSidebar />
-//     </div>
-//   )
-// }
+function Sidebar() {
+  return (
+    <div>
+      <RightSidebar />
+      <Catalog />
+    </div>
+  )
+}
 
 function Footer() {
   return (
     <div>
-      <a href="/"><img src={logo} alt="alvin's blog - logo"/></a>
+      <a href="/"><img src="/images/theme/logo.png" alt="alvin's blog - logo"/></a>
       <p>© 2016-2021 Alvin. All rights</p>
     </div>
   )
@@ -42,5 +41,5 @@ function Footer() {
 ReactDOM.render(<Header />, document.querySelector('#header'))
 ReactDOM.render(<Banner />, document.querySelector('#banner'))
 // ReactDOM.render(<Sidebar />, document.querySelector('#asideLeft'))
-ReactDOM.render(<RightSidebar />, document.querySelector('#asideRight'))
+ReactDOM.render(<Sidebar />, document.querySelector('#asideRight'))
 ReactDOM.render(<Footer />, document.querySelector('#footer'))

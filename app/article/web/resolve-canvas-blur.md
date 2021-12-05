@@ -78,5 +78,5 @@ context.translate(Math.floor(x),Math.floor(y))
 
 <!-- author alvin -->
 <!-- email alvinhtml@gmail.com -->
-<!-- createAt 2016-05-18 20:00:00 -->
+<!-- createAt 2016-05-18 22:03:00 -->
 <!-- updateAt 2016-05-18 20:00:00 -->

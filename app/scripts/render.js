@@ -3,31 +3,29 @@
  */
 
 import * as React from 'react';
-import {renderToStaticMarkup, renderToString} from 'react-dom/server'
+import {renderToStaticMarkup} from 'react-dom/server'
 
 import Header from './components/Header'
 import Banner from './components/Banner'
-import LeftSidebar from './components/LeftSidebar'
+import Catalog from './components/Catalog'
 import SidebarMenu from './components/SidebarMenu'
 import RightSidebar from './components/RightSidebar'
 
 function Sidebar() {
   return (
     <div>
-      <SidebarMenu />
-      <LeftSidebar />
+      <RightSidebar />
+      <Catalog />
     </div>
   )
 }
 
-const header = renderToStaticMarkup(<Header />)
+const header = renderToStaticMarkup(<Header />).replace('[object Object]', '')
 const banner = renderToStaticMarkup(<Banner />)
-const sidebar = renderToStaticMarkup(<Sidebar />)
-const rightSidebar = renderToStaticMarkup(<RightSidebar />).replace('[object Object]', '')
+const sidebar = renderToStaticMarkup(<Sidebar />).replace('[object Object]', '')
 
 module.exports = {
   header,
   banner,
-  sidebar,
-  rightSidebar
+  sidebar
 }

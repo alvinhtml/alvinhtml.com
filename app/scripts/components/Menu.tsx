@@ -7,26 +7,26 @@ export default class Menu extends Component {
     return (
       <ul className="menu">
         <li>
-          <a href="/index.html"><i className="fa fa-fw fa-home" /> 首页</a>
+          <a href="/index.html"><i className="icon-home" /> 首页</a>
         </li>
 
         <li>
-          <a><i className="fa fa-fw fa-bookmark" /> 文章</a>
+          <a><i className="icon-bookmark" /> 文章</a>
           <div className="dropdown-menu">
-            <a className="dropdown-item" href="/article/web.html"><i className="fa fa-fw fa-html5" /> 前端</a>
-            <a className="dropdown-item" href="/article/developer.html"><i className="fa fa-fw fa-server" /> 开发者</a>
-            <a className="dropdown-item" href="/article/algorithm.html"><i className="fa fa-fw fa-code" /> 算法</a>
-            <a className="dropdown-item" href="/article/computer.html"><i className="fa fa-fw fa-desktop" /> 计算机</a>
-            <a className="dropdown-item" href="/article/linux.html"><i className="fa fa-fw fa-linux" /> Linux</a>
+            <a className="dropdown-item" href="/article/web.html">前端</a>
+            <a className="dropdown-item" href="/article/developer.html">开发者</a>
+            <a className="dropdown-item" href="/article/algorithm.html">算法</a>
+            <a className="dropdown-item" href="/article/computer.html">计算机</a>
+            <a className="dropdown-item" href="/article/linux.html">Linux</a>
           </div>
         </li>
 
         <li>
-          <a href="">< i className="fa fa-fw fa-dropbox" /> 项目</a>
+          <a href="">< i className="icon-dropbox" /> 项目</a>
         </li>
 
         <li>
-          <a href="http://note.alvinhtml.com/" target="_blank">< i className="fa fa-fw fa-book" /> 笔记</a>
+          <a href="http://note.alvinhtml.com/" target="_blank">< i className="icon-book-open" /> 笔记</a>
         </li>
       </ul>
     )

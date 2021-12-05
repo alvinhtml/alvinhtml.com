@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import avator from '../../images/theme/avator-me.jpg'
-
 export default class RightSidebar extends Component {
   state: {
     articleCount: number,
@@ -35,9 +33,9 @@ export default class RightSidebar extends Component {
     const {articleCount, categoryCount, keywords} = this.state
 
     return (
-      <div className="card">
+      <div className="card prefile">
         <div className="avator">
-          <img src={avator} alt="Alvin Yang"/>
+          <img src="/images/theme/avator-me.jpg" alt="Alvin Yang"/>
         </div>
         <div className="name">Alvin</div>
         <div className="site-state">
@@ -53,6 +51,17 @@ export default class RightSidebar extends Component {
             <strong className="item-count">{keywords}</strong>
             <span className="item-name">标签</span>
           </div>
+        </div>
+        <div className="social-share">
+          <a className="github" href="https://github.com/alvinhtml" target="_blank">
+            <i className="icon-github-circled" />
+          </a>
+          <a className="twitter" href="">
+            <i className="icon-twitter" />
+          </a>
+          <a className="facebook" href="">
+            <i className="icon-facebook-squared" />
+          </a>
         </div>
       </div>
     )
