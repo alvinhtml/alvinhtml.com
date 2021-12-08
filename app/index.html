@@ -5,50 +5,26 @@
   <meta charset="utf-8">
   <meta name="keywords" content="<%=htmlWebpackPlugin.options.keywords%>" />
   <meta name="description" content="<%=htmlWebpackPlugin.options.description%>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
-  <style>
-    .header .following {
-      position: fixed;
-      top: 0px;
-      z-index: 900;
-      left: 0%;
-      padding: 2em 0em;
-      width: 100%;
-    }
-    .header nav {
-      width: 100%;
-      flex-wrap: nowrap;
-      display: flex;
-      justify-content: space-between;
-    }
-    .header nav .menu li>a {
-      font-size: 0.875rem;
-      border-radius: 0.28571429rem;
-      padding: 0.78571429em 0.92857143em;
-      margin: 0 0.5rem;
-      text-decoration: none;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
-
   <title><%=htmlWebpackPlugin.options.title%></title>
 </head>
 
 <body>
-  <header id="header" class="header">
-    <%=htmlWebpackPlugin.options.header%>
-  </header>
-  <div id="banner" class="banner">
-    <%=htmlWebpackPlugin.options.banner%>
+  <div class="site-container">
+    <header id="header" class="header">
+      <%=htmlWebpackPlugin.options.header%>
+    </header>
+    <div id="banner" class="banner">
+      <%=htmlWebpackPlugin.options.banner%>
+    </div>
+    <div class="content">
+      <div id="main" class="main"><%=htmlWebpackPlugin.options.body%></div>
+      <aside id="asideRight" class="aside aside-right"><%=htmlWebpackPlugin.options.right%></aside>
+    </div>
+    <footer class="footer" id="footer"></footer>
   </div>
-  <div class="content">
-    <aside id="asideLeft" class="aside aside-left"></aside>
-    <div id="main" class="main"><%=htmlWebpackPlugin.options.body%></div>
-    <aside id="asideRight" class="aside aside-right"><%=htmlWebpackPlugin.options.right%></aside>
-  </div>
-  <footer class="footer" id="footer"></footer>
 </body>
 
 </html>

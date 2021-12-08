@@ -74,17 +74,24 @@ export default class Header extends Component {
     const naver = this.nav.current
 
     if (naver) {
-      if (document.documentElement.scrollTop > 0) {
+      const top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      console.log("top", top);
+
+      if (top > 0) {
         naver.classList.add('fixed')
       }
 
-      window.addEventListener('scroll', (e) => {
-        if (document.documentElement.scrollTop > 0) {
+      console.log("naver", naver);
+      const setFixed = (e) => {
+        const top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        if (top > 0) {
           naver.classList.add('fixed')
         } else {
           naver.classList.remove('fixed')
         }
-      })
+      }
+      window.addEventListener('scroll', setFixed)
+      document.body.addEventListener('touchmove', setFixed)
     }
   }
 
@@ -136,7 +143,7 @@ export default class Header extends Component {
             <Menu />
             <div className="search-box">
               <div className={`search ${searchOpened ? 'opened' : ''}`}>
-                <span onClick={this.handleClick.bind(this)}><i className="fa fa-search" /></span>
+                <span onClick={this.handleClick.bind(this)}><i className="icon-search" /></span>
                 <input ref={this.input} placeholder="搜索什么..." onChange={this.handleSearch.bind(this)} onBlur={this.handleBlur.bind(this)} type="text"/>
               </div>
             </div>

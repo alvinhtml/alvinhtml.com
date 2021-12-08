@@ -32,13 +32,15 @@ body {
 }
 
 .header {
+  // transform: scale3d(1, 1, 1);
+
   .following {
     position: fixed;
     top: 0px;
     z-index: 900;
-    left: 0%;
-    padding: 2em 0em;
-    width: 100%;
+    left: 0;
+    right: 0;
+    padding: 2em 0;
     border-bottom: 1px solid transparent;
     transition: padding 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
 
@@ -91,6 +93,7 @@ body {
 
       li {
         display: flex;
+        justify-content: center;
         align-items: center;
         position: relative;
 
@@ -102,6 +105,7 @@ body {
           text-decoration: none;
           color: $white;
           cursor: pointer;
+          text-align: center;
 
           &:hover {
             background-color: rgba(255, 255, 255, .08);
@@ -199,6 +203,7 @@ body {
         }
 
         &.opened {
+          margin-right: 1rem;
           width: 220px;
           background-color: rgba(255, 255, 255, .08);
 
@@ -218,7 +223,7 @@ body {
   z-index: 3;
 
   &::after {
-    background-image: url('./../images/theme/bg-14.jpg');
+    background-image: url('./../images/theme/bg-14-s.jpg');
     position: absolute;
     top: 0px;
     left: 0px;
@@ -236,8 +241,6 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    width: auto !important;
-    max-width: 960px !important;
     text-align: center;
 
     .introduction {
@@ -273,44 +276,6 @@ body {
     flex-grow: 0;
     flex-shrink: 0;
     box-sizing: border-box;
-
-    &.aside-left {
-      flex-basis: 14rem;
-
-      .sidebar-menu {
-        padding: 1rem 0;
-
-        ul {
-          list-style: none;
-
-          .dropdown-menu {
-            a {
-              padding-left: 3rem;
-            }
-          }
-
-          a {
-            display: block;
-            font-size: .9rem;
-            padding: 0.5rem 2rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            word-break: break-all;
-            width: 100%;
-            overflow-x: hidden;
-            white-space: nowrap;
-            color: $dark;
-            text-decoration: none;
-            box-sizing: border-box;
-
-            &:hover {
-              background-color: $background-hover;
-            }
-          }
-        }
-      }
-
-    }
 
     &.aside-right {
       flex-basis: 20rem;
@@ -438,6 +403,7 @@ body {
     flex-grow: 0;
     flex-shrink: 0;
     max-width: 56rem;
+    padding-left: 14rem;
 
     .article {
       margin-top: 4rem;
@@ -461,7 +427,7 @@ body {
 
       .date {
         float: left;
-        margin-left: -160px;
+        margin-left: -10rem;
         width: 100px;
         padding: 20px 0;
         text-align: center;
@@ -484,6 +450,7 @@ body {
 
       .tags {
         margin-top: .85em;
+        word-break: break-all;
 
         span {
           margin: 0 0.5rem 0 0;
@@ -494,6 +461,7 @@ body {
           font-size: .85em;
           font-weight: 200;
           cursor: pointer;
+
 
           &:hover {
             background-color: #e7e7e7;
