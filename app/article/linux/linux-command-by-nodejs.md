@@ -6,7 +6,7 @@ Linux 命令可以使用 shell、python、go 等语言开发，也可以使用 N
 
 ## package bin
 
-在开如之前，让我们先来了解一下 `package.json` 的基础知识。
+在开始之前，让我们先来了解一下 `package.json` 的基础知识。
 
 每个 Node.js 项目都有一个 package.json，package.json 中一个 bin 选项，这个选项是用来配置可执行文件的，当这个包被全局安装时，该文件将被链接到全局 `bin` 所在的位置，如此就相当于添加了一个命令，命令名称由 package bin 的配置所指定。
 
@@ -35,7 +35,7 @@ Linux 命令可以使用 shell、python、go 等语言开发，也可以使用 N
 }
 ```
 
-### 让命令生效
+## 让命令生效
 
 当项目还处于开发阶段中，如何让我们的命令生效，以方便调试呢？有两种办法，一种是将当前项目全局安装，使用
 
@@ -55,7 +55,7 @@ npm link
 # /usr/local/lib/node_modules/myapp -> **/myapp
 ```
 
-根据上面的输入信息，可以看到 `/usr/local/bin/myapp`，已经连接到了我们的 `myapp/cli.js`。调用 `myapp` 命令，就会去执行 `cli.js`。
+根据上面的输出信息，可以看到 `/usr/local/bin/myapp`，已经连接到了我们的 `myapp/cli.js`。调用 `myapp` 命令，就会去执行 `cli.js`。
 
 
 到此，你已经大概知道命令是如何开发并生效的了，接下来，让我们看下 `cli.js` 应该如何写。
