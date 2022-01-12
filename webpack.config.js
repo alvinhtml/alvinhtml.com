@@ -37,8 +37,7 @@ const Md2HtmlWebpackPlugin = require('./app/scripts/md2html-webpack-plugin.js')
 const {
   header,
   banner,
-  sidebar,
-  rightSidebar
+  sidebar
 } = require('./app/scripts/render.js')
 
 const ASSET_PATH = process.env.ASSET_PATH || '/'
@@ -108,7 +107,7 @@ const config = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 20 * 1024 //4kb
+            maxSize: 10 * 1024
           }
         }
       },
@@ -127,80 +126,18 @@ const config = {
   // },
 };
 
-const body = `
-<div class="article article-item">
-  <div class="date">1<small>121.11</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/linux/nginx-gzip.html">nginx 开启 gzip 压缩</a></h2>
-  <p>nginx 开启 gzip 压缩功能可以使网站的 css、js、html 等文件在传输时进行压缩，提高访问速度，进而优化nginx性能，节省流量，一般 gzip 压缩只针对文本文件，而图片视频这些很难再进行压缩的文件，因为压缩效果不好，则没有必要开启 gzip 压缩，如果想优化图片的访问性能，可以在本地压缩，并设置较长一点的生命周期让客户端缓存。</p>
-  <div class="tags"><span>nginx</span>,<span>gzip</span>,<span>gzip_min_length</span>,<span>gzip_types</span></div>
-</div>
-
-<div class="article article-item">
-  <div class="date">5<small>121.11</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/algorithm/linked.html">JavaScript 中的链表</a></h2>
-  <p>链表是一种数据结构，以线性方式存储多个值。链表中的每个值都包含在其自己的节点中，该对象包含数据以及指向列表中下一个节点的链接。链接是指向另一个节点对象的指针，如果没有下一个节点，链接指向 null。如果每个节点只有一个指向另一个节点的指针（最常称为 next ），则该列表被认为是单向链表（or just linked list），而如果每个节点有两个链接（通常是 previous 和 next），则它被认为是双向链表。在这篇文章中，我主要学习单向链表。</p>
-  <div class="tags"><span>JavaScript</span>,<span>链表</span></div>
-</div>
-
-<div class="article article-item">
-  <div class="date">4<small>121.11</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/linux/linux-command-by-nodejs.html">使用 Node.js 开发一个 Linux 命令行工具</a></h2>
-  <p>Linux 命令可以使用 shell、python、go 等语言开发，也可以使用 Node.js，今天介绍怎么使用 Node.js 开发一个简单的 Linux 命令。</p>
-  <div class="tags"><span>Linux</span>,<span>命令行</span>,<span>node</span>,<span>Node.js</span>,<span>commander</span>,<span>cli</span></div>
-</div>
-
-<div class="article article-item">
-  <div class="date">4<small>121.11</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/linux/switch-to-root.html">Linux 系统切换到 root 用户</a></h2>
-  <p>在 Linux 系统中需要 root 权限执行命令，有两种方式可以做到，一种是使用 <code>sudo</code> 临时切获得 root 用户的权限，一种是使用 <code>su</code> 切换到 root 用户。</p>
-  <div class="tags"><span>linux</span>,<span>root</span>,<span>su</span>,<span>sudo</span>,<span>管理员权限</span>,<span>切换</span></div>
-</div>
-
-<div class="article article-item">
-  <div class="date">0<small>121.10</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/algorithm/tree.html">JavaScript 中的树数据结构</a></h2>
-  <p>树是一种有趣的数据结构。它在各个领域都有广泛的应用。</p>
-  <div class="tags"><span>数据结构</span>,<span>二叉树</span>,<span>遍历</span></div>
-</div>
-
-<div class="article article-item">
-  <div class="date">6<small>121.9</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/web/vite-proxy-https.html">vite 中配置 proxy 代理 https</a></h2>
-  <p>在做前端开发的时候，我们通常是启动一个 node server 方便调试代码，并且能够支持热更新，但后端提供的 api 接口往往在另一台服务器上，这时候，就需要用到代理（proxy）。</p>
-  <div class="tags"><span>vite</span>,<span>proxy</span>,<span>https</span></div>
-</div>
-
-<div class="article article-item">
-  <div class="date">3<small>116.5</small></div>
-  <div class="time">20:0</div>
-  <h2><a href="/article/web/resolve-canvas-blur.html">Canvas画图模糊问题及解决方法</a></h2>
-  <p>使用canvas画图时经常遇到画出来的图形模糊、边框不清晰等现象，曾经为了解决这些问题走了很多弯路，浪费了大把时间，当然也积累了一些经验，今天就把这些问题总结出来。</p>
-  <div class="tags"><span>canvas</span>,<span>模糊</span></div>
-</div>
-
-
-
-`
-
 const htmlWebpackPluginConfig = {
   template: './app/index.html',
-  filename: 'index.html',
-  // filename: 'md.html',
+  // filename: 'index.html',
+  filename: 'md.html',
   hash: true,
   chunks: ['index'],
   title: '<%=Md2HtmlWebpackPlugin.title%>',
   header: header,
   banner: banner,
-  left: sidebar,
-  right: rightSidebar,
-  // body: '<%=Md2HtmlWebpackPlugin.body%>',
-  body: body,
+  right: sidebar,
+  body: '<%=Md2HtmlWebpackPlugin.body%>',
+  // body: body,
   keywords: '<%=Md2HtmlWebpackPlugin.keywords%>',
   description: '<%=Md2HtmlWebpackPlugin.description%>'
 }
@@ -228,7 +165,6 @@ if (process.env.NODE_ENV === 'production') {
   htmlWebpackPluginConfig.minify = {
     removeComments: true,
     removeAttributeQuotes: true,
-    collapseWhitespace: true,
     collapseWhitespace: true
   }
 

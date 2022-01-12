@@ -50,6 +50,28 @@ export default defineConfig({
 }
 ```
 
+## 代理 WebSocket
+
+WebSocket 使用的是 ws 协议，如果希望同时代理 WebSocket 接口，只需要设置 `ws: true` 即可。
+
+
+```js
+{
+  proxy: {
+    "/api": {
+      target: 'http://example.com',
+      changeOrigin: true,
+      secure: false,
+      ws: true,
+      headers: {                  
+        Referer: 'http://example.com'
+      }
+    }
+  }
+}
+```
+
+
 ## 参考
 
 - [Vite 官方中文文档](https://cn.vitejs.dev/config/#server-open)
@@ -61,5 +83,5 @@ export default defineConfig({
 
 <!-- author alvin -->
 <!-- email alvinhtml@gmail.com -->
-<!-- createAt 2021-09-04 20:00:00 -->
-<!-- updateAt 2021-09-04 20:00:00 -->
+<!-- createAt 2021-09-04 21:23:00 -->
+<!-- updateAt 2021-12-16 15:40:00 -->
