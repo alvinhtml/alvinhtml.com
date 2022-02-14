@@ -15,15 +15,15 @@
 实现一个二叉树，非常简单：
 
 ```js
-function Node(value){
-  this.value = value
-  this.left = null
-  this.right = null
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
 }
 // usage
-const root = new Node(2)
-root.left = new Node(1)
-root.right = new Node(3)
+const root = new Node(2);
+root.left = new Node(1);
+root.right = new Node(3);
 ```
 
 ## 遍历
@@ -45,7 +45,6 @@ root.right = new Node(3)
 
 ![广度优先遍历](../../images/algorithm/tree-01.jpeg)
 
-
 为了实现这种形式的遍历，我们可以使用队列（先进先出）数据结构。以下是整个算法的样子：
 
 - 启动一个包含 root 的队列
@@ -56,26 +55,26 @@ root.right = new Node(3)
 下面是这个算法在实现后的样子：
 
 ```js
-function walkBFS(root){
+function walkBFS(root) {
   if (root === null) {
-    return
+    return;
   }
 
-  const queue = [root]
+  const queue = [root];
 
   while (queue.length) {
-      const item = queue.shift()
-      // do something
-      console.log(item)
+    const item = queue.shift();
+    // do something
+    console.log(item);
 
-      if (item.left) {
-        queue.push(item.left)
-      }
+    if (item.left) {
+      queue.push(item.left);
+    }
 
-      if (item.right) {
-        queue.push(item.right)
-      }
-   }
+    if (item.right) {
+      queue.push(item.right);
+    }
+  }
 }
 ```
 
@@ -84,28 +83,28 @@ function walkBFS(root){
 ```js
 function walkBFS(root) {
   if (root === null) {
-    return
+    return;
   }
 
-  const queue = [root]
-  const ans = []
+  const queue = [root];
+  const ans = [];
 
   while (queue.length) {
-    const len = queue.length
-    const level = []
+    const len = queue.length;
+    const level = [];
     for (let i = 0; i < len; i++) {
-      const item = queue.shift()
-      level.push(item)
+      const item = queue.shift();
+      level.push(item);
       if (item.left) {
-        queue.push(item.left)
+        queue.push(item.left);
       }
       if (item.right) {
-        queue.push(item.right)
+        queue.push(item.right);
       }
     }
-    ans.push(level)
+    ans.push(level);
   }
-  return ans
+  return ans;
 }
 ```
 
@@ -141,22 +140,21 @@ left node -> right node -> root node // post-order traversal
 
 让我们深入研究这种遍历的实际实现。 递归方法相当直观。
 
-
 ```js
 function walkPreOrder(root) {
   if (root === null) {
-    return
+    return;
   }
 
   // do something here
-  console.log(root.value)
+  console.log(root.value);
 
   // recurse through child nodes
   if (root.left) {
-    walkPreOrder(root.left)
+    walkPreOrder(root.left);
   }
   if (root.right) {
-    walkPreOrder(root.right)
+    walkPreOrder(root.right);
   }
 }
 ```
@@ -166,22 +164,22 @@ PreOrder 遍历的迭代方法与 BFS 非常相似，除了我们使用 `stack` 
 ```js
 function walkPreOrder(root) {
   if (root === null) {
-    return
+    return;
   }
 
-  const stack = [root]
+  const stack = [root];
   while (stack.length) {
-    const item = stack.pop()
+    const item = stack.pop();
 
     // do something
-    console.log(item)
+    console.log(item);
 
     // Left child is pushed after right one, since we want to print left child first hence it must be above right child in the stack
     if (item.right) {
-      stack.push(item.right)
+      stack.push(item.right);
     }
     if (item.left) {
-      stack.push(item.left)
+      stack.push(item.left);
     }
   }
 }
@@ -204,18 +202,18 @@ root node -> left node -> right node
 ```js
 function walkInOrder(root) {
   if (root === null) {
-    return
+    return;
   }
 
   if (root.left) {
-    walkInOrder(root.left)
+    walkInOrder(root.left);
   }
 
   // do something here
-  console.log(root)
+  console.log(root);
 
   if (root.right) {
-    walkInOrder(root.right)
+    walkInOrder(root.right);
   }
 }
 ```
@@ -223,34 +221,34 @@ function walkInOrder(root) {
 这个算法起初可能看起来有点神秘。但它相当直观。让我们这样看：在 InOrder 遍历中，最左边的孩子首先被打印，然后是根，然后是右孩子。所以首先想到的是想出这样的东西：
 
 ```js
-let curr = root
+let curr = root;
 
 while (curr) {
   while (curr.left) {
-    curr = curr.left // get to leftmost child
+    curr = curr.left; // get to leftmost child
   }
 
-  console.log(curr) // print it
+  console.log(curr); // print it
 
-  curr = curr.right // now move to right child
+  curr = curr.right; // now move to right child
 }
 ```
 
 在上述方法中，我们无法回溯，即返回导致最左侧节点的父节点。所以我们需要一个堆栈来记录这些。因此，我们修订后的方法可能如下所示：
 
 ```js
-const stack = []
-let curr = root
+const stack = [];
+let curr = root;
 
 while (stack.length || curr) {
   while (curr) {
-    stack.push(curr) // keep recording the trail, to backtrack
-    curr = curr.left // get to leftmost child
+    stack.push(curr); // keep recording the trail, to backtrack
+    curr = curr.left; // get to leftmost child
   }
-  const leftMost = stack.pop()
-  console.log(leftMost) // print it
+  const leftMost = stack.pop();
+  console.log(leftMost); // print it
 
-  curr = leftMost.right // now move to right child
+  curr = leftMost.right; // now move to right child
 }
 ```
 
@@ -259,23 +257,23 @@ while (stack.length || curr) {
 ```js
 function walkInOrder(root) {
   if (root === null) {
-    return
+    return;
   }
 
-  const stack = []
-  let current = root
+  const stack = [];
+  let current = root;
 
   while (stack.length || current) {
     while (current) {
-      stack.push(current)
-      current = current.left
+      stack.push(current);
+      current = current.left;
     }
-    const last = stack.pop()
+    const last = stack.pop();
 
     // do something
-    console.log(last)
+    console.log(last);
 
-    current = last.right
+    current = last.right;
   }
 }
 ```
@@ -299,18 +297,18 @@ left node -> right node -> root node
 ```js
 function walkPostOrder(root) {
   if (root === null) {
-    return
+    return;
   }
 
   if (root.left) {
-    walkPostOrder(root.left)
+    walkPostOrder(root.left);
   }
   if (root.right) {
-    walkPostOrder(root.right)
+    walkPostOrder(root.right);
   }
 
   // do something here
-  console.log(root)
+  console.log(root);
 }
 ```
 
@@ -337,37 +335,36 @@ root -> right -> left
 left -> right -> root
 ```
 
-- 使用与上述迭代 preOrder 算法类似的方法，使用临时stack.
-    - 唯一的例外是我们去 root -> right -> left 而不是 root -> left -> right
+- 使用与上述迭代 preOrder 算法类似的方法，使用临时 stack.
+  - 唯一的例外是我们去 root -> right -> left 而不是 root -> left -> right
 - 继续记录数组中的遍历序列 result
-- 反转result给出 postOrder 遍历
-
+- 反转 result 给出 postOrder 遍历
 
 ```js
 function walkPostOrder(root) {
   if (root === null) {
-    return []
+    return [];
   }
 
-  const tempStack = [root]
-  const result = []
+  const tempStack = [root];
+  const result = [];
 
   while (tempStack.length) {
-    const last = tempStack.pop()
+    const last = tempStack.pop();
 
-    result.push(last)
+    result.push(last);
 
     if (last.left) {
-      tempStack.push(last.left)
+      tempStack.push(last.left);
     }
     if (last.right) {
-      tempStack.push(last.right)
+      tempStack.push(last.right);
     }
 
     console.log("last", last);
   }
 
-  return result.reverse()
+  return result.reverse();
 }
 ```
 
@@ -377,42 +374,38 @@ function walkPostOrder(root) {
 
 ```js
 for (let node of walkPreOrder(tree)) {
-  console.log(node)
+  console.log(node);
 }
 ```
 
-看起来真的很好而且很容易阅读，不是吗？我们所要做的就是使用一个walk函数，它会返回一个迭代器。
+看起来真的很好而且很容易阅读，不是吗？我们所要做的就是使用一个 walk 函数，它会返回一个迭代器。
 
 以下是我们如何修改 walkPreOrder 上面的函数以按照上面共享的示例运行：
-
 
 ```js
 function* walkPreOrder(root) {
   if (root === null) {
-    return
+    return;
   }
 
-  const stack = [root]
+  const stack = [root];
 
   while (stack.length) {
-    const item = stack.pop()
-    yield item
+    const item = stack.pop();
+    yield item;
     if (item.right) {
-      stack.push(item.right)
+      stack.push(item.right);
     }
     if (item.left) {
-      stack.push(item.left)
+      stack.push(item.left);
     }
   }
 }
 
-
 for (let node of walkPreOrder(root)) {
-  console.log(node)
+  console.log(node);
 }
 ```
-
-原文链接：[Tree data structure in JavaScript](https://stackfull.dev/tree-data-structure-in-javascript)
 
 ## Keywords
 
