@@ -202,9 +202,9 @@ employee.sayName();
 
 ## Keywords
 
-`canvas` `模糊`
+`JavaScript` `继承` `原型继承` `构造函数继承` `组合继承` `寄生继承`
 
 <!-- author alvin -->
 <!-- email alvinhtml@gmail.com -->
-<!-- createAt 2022-02-11 17:59:00 -->
-<!-- updateAt 2022-02-11 17:59:00 -->
+<!-- createAt 2022-02-21 17:59:00 -->
+<!-- updateAt 2022-02-21 17:59:00 -->
