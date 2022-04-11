@@ -28,6 +28,10 @@ export default class Menu extends Component {
         <li>
           <a href="http://note.alvinhtml.com/" target="_blank">< i className="icon-book-open" /> 笔记</a>
         </li>
+
+        <li>
+          <a href="http://me.alvinhtml.com/" target="_blank">< i className="icon-user-circle" /> 简历</a>
+        </li>
       </ul>
     )
   }

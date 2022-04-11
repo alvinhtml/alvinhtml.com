@@ -1,14 +1,16 @@
 import fs from 'fs'
 import path from 'path'
 import colors from 'colors-console'
-import { readdir } from 'fs/promises'
+import {
+  readdir
+} from 'fs/promises'
 import marked from 'marked'
 import hljs from 'highlight.js'
 
 
 marked.setOptions({
   renderer: new marked.Renderer(),
-  highlight: function(code, lang) {
+  highlight: function (code, lang) {
     const language = hljs.getLanguage(lang) ? lang : 'plaintext'
     return hljs.highlight(code, {
       language
@@ -111,7 +113,10 @@ class md2htmlWebpackPlugin {
   }
 
   async walk(dir) {
-    const {input, output} = this.options
+    const {
+      input,
+      output
+    } = this.options
     const category = path.basename(dir)
 
     try {
@@ -151,7 +156,10 @@ class md2htmlWebpackPlugin {
       return false
     }
 
-    const {input, output} = this.options
+    const {
+      input,
+      output
+    } = this.options
 
     const mdContent = fs.readFileSync(filePath, 'utf8')
 
@@ -183,7 +191,7 @@ class md2htmlWebpackPlugin {
 
     try {
       createAt = new Date(createAtResult[1]).getTime()
-    } catch(err) {
+    } catch (err) {
       createAt = fs.statSync(filePath).ctimeMs || ''
     }
 
