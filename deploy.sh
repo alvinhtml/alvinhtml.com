@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-user=ec2-user
-host=18.217.233.182
+user=root
+host=144.34.170.146
 port=22
 
 src=`pwd`"/dist/"
