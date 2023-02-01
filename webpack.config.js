@@ -3,16 +3,16 @@ require('@babel/register')({
   presets: [
     '@babel/preset-env',
     '@babel/preset-react',
-    '@babel/preset-typescript'
+    '@babel/preset-typescript',
   ],
   plugins: [
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-runtime',
-    '@babel/plugin-transform-regenerator'
+    '@babel/plugin-transform-regenerator',
   ],
   // https://babeljs.io/docs/en/babel-preset-typescript
-  extensions: ['.js', '.ts', '.tsx']
+  extensions: ['.js', '.ts', '.tsx'],
 })
 
 /*!
@@ -26,31 +26,23 @@ require.extensions['.gif'] = () => {}
 require.extensions['.png'] = () => {}
 require.extensions['.svg'] = () => {}
 
-
 const path = require('path')
-const webpack = require('webpack') // webpack 插件
-const dotenv = require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽离 css 文件，使用这个插件需要单独配置 JS 和 CSS 压缩
 const FileManagerPlugin = require('filemanager-webpack-plugin')
 const Md2HtmlWebpackPlugin = require('./app/scripts/md2html-webpack-plugin.js')
-const {
-  header,
-  banner,
-  sidebar
-} = require('./app/scripts/render.js')
+const { header, banner, sidebar } = require('./app/scripts/render.js')
 
 const ASSET_PATH = process.env.ASSET_PATH || '/'
 
 const config = {
-
   mode: process.env.NODE_ENV,
 
   // 源码映射，生成一个映射文件，帮我们定位源码文件
   devtool: 'source-map',
 
   entry: {
-    index: ['./app/scripts/main']
+    index: ['./app/scripts/main'],
   },
 
   output: {
@@ -58,28 +50,26 @@ const config = {
     path: path.resolve(__dirname, './dist'), // 路径必须是绝对路径,
     assetModuleFilename: '[hash][ext][query]', // 自定义输出文件名
     clean: true,
-    publicPath: ASSET_PATH
+    publicPath: ASSET_PATH,
   },
 
   resolve: {
     modules: [path.resolve('node_modules')],
     alias: {
       '~': path.resolve(__dirname, './app'),
-      'images': path.resolve(__dirname, './app/images')
+      images: path.resolve(__dirname, './app/images'),
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css'] // 配置省略后缀名
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css'], // 配置省略后缀名
   },
 
-  module: { // 模块
+  module: {
+    // 模块
 
-    rules: [ // 规则
+    rules: [
+      // 规则
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(scss|sass)$/,
@@ -91,31 +81,32 @@ const config = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: ['./node_modules/normalize-scss/sass']
+                includePaths: ['./node_modules/normalize-scss/sass'],
+                // implementation: require('dart-sass'),
               },
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['ts-loader']
+        use: ['ts-loader'],
       },
       {
         test: /\.(jpg|png|gif|jpeg|bmp|svg)$/,
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024
-          }
-        }
+            maxSize: 10 * 1024,
+          },
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
-      }
-    ]
+        type: 'asset/resource',
+      },
+    ],
   },
 
   // watch: true,
@@ -124,7 +115,7 @@ const config = {
   //     aggregateTimeout: 2000, // 防抖
   //     ignored: /node_modules|vendor|build|public|resources/
   // },
-};
+}
 
 const htmlWebpackPluginConfig = {
   template: './app/index.html',
@@ -139,16 +130,17 @@ const htmlWebpackPluginConfig = {
   body: '<%=Md2HtmlWebpackPlugin.body%>',
   // body: body,
   keywords: '<%=Md2HtmlWebpackPlugin.keywords%>',
-  description: '<%=Md2HtmlWebpackPlugin.description%>'
+  description: '<%=Md2HtmlWebpackPlugin.description%>',
 }
 
-const plugins = [ // 数组，放着所有 webpack 插件
+const plugins = [
+  // 数组，放着所有 webpack 插件
   // new webpack.DefinePlugin({
   //   'process.env.ASSET_PATH': JSON.stringify('http://localhost:8020'),
   // }),
   new MiniCssExtractPlugin({
-    filename: '[name].min.css'
-  })
+    filename: '[name].min.css',
+  }),
 ]
 
 const devServer = {
@@ -157,7 +149,7 @@ const devServer = {
   contentBase: './dist', // 配置目录
   open: false, // 在DevServer第一次构建完成时，自动用浏览器打开网页
   historyApiFallback: true,
-  hot: true
+  hot: true,
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -165,10 +157,10 @@ if (process.env.NODE_ENV === 'production') {
   htmlWebpackPluginConfig.minify = {
     removeComments: true,
     removeAttributeQuotes: true,
-    collapseWhitespace: true
+    collapseWhitespace: true,
   }
 
-  config.devtool = false;
+  config.devtool = false
 
   const md2HtmlPlugin = new Md2HtmlWebpackPlugin({
     template: 'dist/md.html',
@@ -176,19 +168,24 @@ if (process.env.NODE_ENV === 'production') {
     output: 'dist/article',
   })
   plugins.push(new HtmlWebpackPlugin(htmlWebpackPluginConfig))
-  plugins.push(new FileManagerPlugin({
-    events: {
-      onEnd: {
-        copy: [{
-            source: path.resolve(__dirname, 'app/images'),
-            destination: path.resolve(__dirname, 'dist/images')
-        },{
-            source: path.resolve(__dirname, 'app/images/theme/logo.png'),
-            destination: path.resolve(__dirname, 'dist/favicon.png')
-        }]
-      }
-    }
-  }))
+  plugins.push(
+    new FileManagerPlugin({
+      events: {
+        onEnd: {
+          copy: [
+            {
+              source: path.resolve(__dirname, 'app/images'),
+              destination: path.resolve(__dirname, 'dist/images'),
+            },
+            {
+              source: path.resolve(__dirname, 'app/images/theme/logo.png'),
+              destination: path.resolve(__dirname, 'dist/favicon.png'),
+            },
+          ],
+        },
+      },
+    })
+  )
   plugins.push(md2HtmlPlugin)
 } else {
   plugins.push(new HtmlWebpackPlugin(htmlWebpackPluginConfig))

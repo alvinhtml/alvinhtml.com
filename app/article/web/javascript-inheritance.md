@@ -8,14 +8,14 @@
 
 ```js
 function Person(name) {
-  this.name = name;
+  this.name = name
   this.sayName = function () {
-    console.log(this.name);
-  };
+    console.log(this.name)
+  }
 }
 
-const P1 = new Person("John");
-const P2 = new Person("Amy");
+const P1 = new Person('John')
+const P2 = new Person('Amy')
 ```
 
 这在段代码中，我们每 new 一个实例，`sayName()` 方法都会在内存中被拷贝一份，这就会造成内存的浪费，我们实际上希望所有实例都共用同一个 `sayName()` 方法，JavaScript 中的原型就是用来帮我们实现共享属性或方法的。
@@ -24,12 +24,12 @@ const P2 = new Person("Amy");
 
 ```js
 function Person(name) {
-  this.name = name;
+  this.name = name
 }
 
 Person.prototype.sayName = function () {
-  console.log(this.name);
-};
+  console.log(this.name)
+}
 ```
 
 这样，无论我们 new 多少次，`sayName()` 在内存中始终只存在一份。
@@ -64,23 +64,23 @@ Person.prototype.sayName = function () {
 
 ```js
 function Person(name) {
-  this.name = name;
+  this.name = name
 }
 
 Person.prototype.sayName = function () {
-  console.log(this.name);
-};
+  console.log(this.name)
+}
 
 function Employee(title) {
-  this.title = title;
+  this.title = title
 }
 
 // 将子类 Employee 的 prototype 指向父类 Person 的实例
-Employee.prototype = new Person("John");
+Employee.prototype = new Person('John')
 
-const employee = new Employee("Manager");
+const employee = new Employee('Manager')
 
-employee.sayName();
+employee.sayName()
 ```
 
 Person 类的原型上有一个 sayName() 方法，我们希望 Employee 也能继承这个方法，所以我们将 Employee 的 prototype 指向 Person 类的一个实例。
@@ -93,23 +93,23 @@ Person 类的原型上有一个 sayName() 方法，我们希望 Employee 也能�
 
 ```js
 function Person(name) {
-  this.name = name;
+  this.name = name
 }
 
 Person.prototype.sayName = function () {
-  console.log(this.name);
-};
+  console.log(this.name)
+}
 
 function Employee(name, title) {
   // 利用 call 调用父类构造函数
-  Person.call(this, name);
-  this.title = title;
+  Person.call(this, name)
+  this.title = title
 }
 
-const employee = new Employee("John", "Manager");
+const employee = new Employee('John', 'Manager')
 
-console.log(employee.name);
-console.log(employee.sayName); // undefined
+console.log(employee.name)
+console.log(employee.sayName) // undefined
 ```
 
 与原型继承相比，虽然实现了参数传递，但不能继承父类原型上的方法。你可能会想到，能不能将两种方式结合起来呢？这就是第三种继承方式：**组合继承**。
@@ -120,23 +120,23 @@ console.log(employee.sayName); // undefined
 
 ```js
 function Person(name) {
-  this.name = name;
+  this.name = name
 }
 
 Person.prototype.sayName = function () {
-  console.log(this.name);
-};
-
-function Employee(name, title) {
-  Person.call(this, name);
-  this.title = title;
+  console.log(this.name)
 }
 
-Employee.prototype = new Person();
+function Employee(name, title) {
+  Person.call(this, name)
+  this.title = title
+}
 
-const employee = new Employee("John", "Manager");
-employee.sayName();
-console.log(employee.constructor); // Person
+Employee.prototype = new Person()
+
+const employee = new Employee('John', 'Manager')
+employee.sayName()
+console.log(employee.constructor) // Person
 ```
 
 将前面两种方式结合后，不仅可以传递参数，还能继承原型链中的方法。
@@ -144,7 +144,7 @@ console.log(employee.constructor); // Person
 当我们打印 `employee.constructor` 的时候，发现指向的却是父类构造函数，所以我们需要手动修复下。
 
 ```js
-Employee.prototype.constructor = Employee;
+Employee.prototype.constructor = Employee
 ```
 
 但是上面这种继承方式还是有些小问题，细心的你可能已经发现，构造函数 Person 被调用了两次。
@@ -158,11 +158,11 @@ Employee.prototype.constructor = Employee;
 
 function objectCreate(obj) {
   function F() {}
-  F.prototype = obj;
-  return new F();
+  F.prototype = obj
+  return new F()
 }
 
-Employee.prototype = objectCreate(Person.prototype);
+Employee.prototype = objectCreate(Person.prototype)
 ```
 
 通过一个中间对象避免了构造函数两次调用的问题，在 JavaScript 中，Object 有个 `create()` 方法可以基于现有对象创建一个新对象，我们可以使用它来代替 `objectCreate()`。
@@ -171,24 +171,24 @@ Employee.prototype = objectCreate(Person.prototype);
 
 ```js
 function Person(name) {
-  this.name = name;
+  this.name = name
 }
 
 Person.prototype.sayName = function () {
-  console.log(this.name);
-};
-
-function Employee(name, title) {
-  Person.call(this, name);
-  this.title = title;
+  console.log(this.name)
 }
 
-Employee.prototype = Object.create(Person.prototype);
-Employee.prototype.constructor = Employee;
+function Employee(name, title) {
+  Person.call(this, name)
+  this.title = title
+}
 
-const employee = new Employee("John", "Manager");
+Employee.prototype = Object.create(Person.prototype)
+Employee.prototype.constructor = Employee
 
-employee.sayName();
+const employee = new Employee('John', 'Manager')
+
+employee.sayName()
 ```
 
 ## 结束语

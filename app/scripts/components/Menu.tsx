@@ -18,6 +18,7 @@ export default class Menu extends Component {
             <a className="dropdown-item" href="/article/algorithm.html">算法</a>
             <a className="dropdown-item" href="/article/computer.html">计算机</a>
             <a className="dropdown-item" href="/article/linux.html">Linux</a>
+            <a className="dropdown-item" href="/article/mind.html">思考与决策</a>
           </div>
         </li>
 
